@@ -1,5 +1,4 @@
 .DS_Store
 *.webp
 *.mp4
-*.png
 node_modules/
