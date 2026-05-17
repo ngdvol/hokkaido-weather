@@ -880,6 +880,12 @@ function renderDayDetail(dayId) {
 
   // Construct UI Cards
   container.innerHTML = `
+    <!-- CALENDAR HEADER ROW WITH CLARIFYING LEGEND -->
+    <div class="calendar-header-row">
+      <span class="calendar-header-title"><i data-lucide="calendar"></i> Select Day Plan</span>
+      <span class="calendar-header-legend">Percentages represent the <b>Photography Score</b> (not rain probability)</span>
+    </div>
+
     <!-- HORIZONTAL CALENDAR STRIP -->
     <div class="calendar-strip glass-panel">
       ${dateList.map(d => {
@@ -896,7 +902,7 @@ function renderDayDetail(dayId) {
             <span class="cal-day-name">${dayName}</span>
             <span class="cal-day-num">${dayNum}</span>
             <span class="cal-weather-icon">${dayWeatherMap.emoji}</span>
-            <span class="cal-photo-score">${daySummary.photoScore}%</span>
+            <span class="cal-photo-score">${daySummary.photoScore}% Score</span>
           </button>
         `;
       }).join('')}
@@ -994,6 +1000,26 @@ function renderDayDetail(dayId) {
             </div>
           </div>
         </div>
+
+        <!-- SECOND MINI DATE SELECTOR DIRECTLY ABOVE THE GRAPH -->
+        <div class="mini-chart-date-selector">
+          ${dateList.map(d => {
+            const isActive = d === selectedDate;
+            const dateObj = new Date(d);
+            const dayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][dateObj.getDay()];
+            const dayNum = dateObj.getDate();
+            const dayWeather = locationWeather.daily[d];
+            const daySummary = dayWeather.summary;
+            
+            return `
+              <button class="mini-date-btn ${isActive ? 'active' : ''}" onclick="changeDayDate('${dayId}', '${d}')">
+                <span class="mini-btn-name">${dayName} ${dayNum}</span>
+                <span class="mini-btn-score">${daySummary.photoScore}% Score</span>
+              </button>
+            `;
+          }).join('')}
+        </div>
+        
         <div class="chart-container">
           <canvas id="hourlyWeatherChart"></canvas>
         </div>
