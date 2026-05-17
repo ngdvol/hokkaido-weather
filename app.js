@@ -1391,7 +1391,7 @@ function renderMobileVerticalMatrix() {
         </div>
         <div class="mobile-card-detail-bar">
           <span class="mobile-card-score-badge ${badgeClass}">${summary.photoScore}% Score</span>
-          <span class="mobile-card-weather-lbl">${weatherMap.label} · ${summary.conditionDesc}</span>
+          <span class="mobile-card-weather-lbl">${weatherMap.text} · Peak Rain: ${summary.maxPrecipProb}%</span>
         </div>
       </div>
     `;
