@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hokkaido Slow-Drive Photography Weather Dashboard (24 - 30 May 2026)</title>
+  <meta name="description" content="An automated, high-precision weather forecast dashboard for Hokkaido slow-drive photography routes. Track hourly rain windows and photography ratings for late May 2026.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sticky Mobile Header Bar (Only visible on phone viewports) -->
+  <div class="mobile-header-bar glass-panel" style="display: none;">
+    <div class="mobile-brand">
+      <i data-lucide="cloud-lightning"></i>
+      <span>Hokkaido Live</span>
+    </div>
+    <button class="hamburger-btn" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle Menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </div>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar glass-panel">
+      <div class="brand-section">
+        <h2 class="brand-title">
+          <i data-lucide="cloud-lightning" style="color: var(--accent-purple);"></i>
+          <span>Hokkaido Live</span>
+        </h2>
+        <div class="brand-subtitle">Photography Planner</div>
+      </div>
+      
+      <!-- Navigation Menu -->
+      <nav class="nav-menu" style="overflow-y: auto; padding-right: 2px;">
+        <li class="nav-item">
+          <a class="nav-link tab-overview active" onclick="switchTab('overview')">
+            <i data-lucide="layout-dashboard"></i>
+            <span>Overview Dashboard</span>
+            <span class="nav-badge">All</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link tab-sapporo" onclick="switchTab('sapporo')">
+            <i data-lucide="building"></i>
+            <span>Sapporo (Base)</span>
+            <span class="nav-badge">Base</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link tab-takikawa" onclick="switchTab('takikawa')">
+            <i data-lucide="palette"></i>
+            <span>Takikawa Fields</span>
+            <span class="nav-badge">Fields</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link tab-kutchan" onclick="switchTab('kutchan')">
+            <i data-lucide="flower2"></i>
+            <span>Kutchan Pink Moss</span>
+            <span class="nav-badge">Moss</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link tab-otaru" onclick="switchTab('otaru')">
+            <i data-lucide="camera"></i>
+            <span>Otaru Canal</span>
+            <span class="nav-badge">Canal</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link tab-biei" onclick="switchTab('biei')">
+            <i data-lucide="sparkles"></i>
+            <span>Biei Blue Pond</span>
+            <span class="nav-badge">Pond</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link tab-yotei" onclick="switchTab('yotei')">
+            <i data-lucide="mountain"></i>
+            <span>Mt. Yotei Viewpoints</span>
+            <span class="nav-badge">Volcano</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link tab-toya" onclick="switchTab('toya')">
+            <i data-lucide="waves"></i>
+            <span>Lake Toya Caldera</span>
+            <span class="nav-badge">Lake</span>
+          </a>
+        </li>
+      </nav>
+      
+      <!-- Sidebar Footer / API Status -->
+      <div class="sidebar-footer">
+        <div class="api-status">
+          <div id="status-dot" class="status-indicator live"></div>
+          <span id="status-text">Fetching Live Forecast...</span>
+        </div>
+        <div class="api-status" style="font-size: 0.7rem; color: var(--text-muted);">
+          <i data-lucide="refresh-cw" style="width: 12px; height: 12px;"></i>
+          <span id="update-timestamp">Last updated: Just now</span>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Action Bar / Header -->
+      <header class="header-card glass-panel fade-in">
+        <div class="header-info">
+          <h1 id="main-title">Sapporo Weather &amp; Photography Intel</h1>
+          <p id="main-subtitle">
+            <i data-lucide="calendar"></i>
+            <span>Loading forecast range: 24 - 30 May 2026</span>
+          </p>
+        </div>
+        <button id="refresh-button" class="btn-refresh" onclick="refreshData()">
+          <i data-lucide="refresh-cw"></i>
+          <span>Refresh Forecast</span>
+        </button>
+      </header>
+      
+      <!-- TAB: OVERVIEW DASHBOARD -->
+      <section id="overview-tab" class="fade-in">
+        <div class="day-dashboard">
+          
+          <!-- Trip Overview Banner -->
+          <div class="trip-summary-banner glass-panel">
+            <div class="card-bg-blur" style="background: var(--accent-purple); opacity: 0.08;"></div>
+            <div class="trip-summary-content">
+              <h2>Hokkaido Late-May Slow-Drive Campaign</h2>
+              <p>Hokkaido vehicle rentals are at critical levels. This system automatically polls live predictions for your customized slow-driving loops. May 24–30 is characterized by soft rain and dramatic morning mists—excellent for rich, moody photography saturated with color.</p>
+            </div>
+            <div class="trip-stats-strip">
+              <div class="trip-stat-block">
+                <div class="trip-stat-num" id="ov-avg-temp">15.4°C</div>
+                <div class="trip-stat-lbl">Avg Temperature</div>
+              </div>
+              <div class="trip-stat-block">
+                <div class="trip-stat-num" id="ov-wet-days">3 / 4</div>
+                <div class="trip-stat-lbl">Moody Shoot Days</div>
+              </div>
+              <div class="trip-stat-block">
+                <div class="trip-stat-num" style="color: var(--accent-yellow);" id="ov-photogenic-index">92%</div>
+                <div class="trip-stat-lbl">Moody Photo Score</div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- NEW: Weekly Comparison Matrix Planner -->
+          <div class="weekly-comparison-section glass-panel" style="padding: 1.75rem 2rem; position: relative; overflow: hidden; margin-top: 1.5rem;">
+            <div class="card-bg-blur" style="background: var(--accent-purple); opacity: 0.05; width: 300px; height: 300px;"></div>
+            <div class="section-title-row">
+              <i data-lucide="calendar-days" style="color: var(--accent-purple); width: 22px; height: 22px;"></i>
+              <h3>Weekly Comparative Photo Planner Matrix</h3>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1.25rem; line-height: 1.4;">
+              Below is the comprehensive forecast for your entire travel period across all target spots. A higher <strong>Moody Index (%)</strong> indicates ideal soft overcast sky diffusion, mysterious morning fog, or saturated light rain. <strong>Click on any cell to open that specific location's hourly blueprint!</strong>
+            </p>
+            <div class="weekly-table-wrapper">
+              <table class="weekly-table" id="weekly-comparison-table">
+                <!-- Dynamically populated by app.js -->
+              </table>
+            </div>
+            
+            <!-- Mobile Optimized Vertical List (Swapped via CSS on mobile/iPhone screen sizes) -->
+            <div class="mobile-matrix-vertical" id="mobile-matrix-vertical">
+              <!-- Dynamically populated by app.js -->
+            </div>
+          </div>
+
+          <!-- Section title for Location Spotlights -->
+          <div class="section-title-row" style="margin-top: 2rem;">
+            <i data-lucide="map-pin" style="color: var(--accent-pink); width: 22px; height: 22px;"></i>
+            <h3 style="font-family: var(--font-title); font-size: 1.4rem; font-weight: 700;">Location Photography Target Blueprints</h3>
+          </div>
+
+          <!-- Main Grid of Days -->
+          <div class="overview-grid" id="overview-grid-container" style="grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 0.75rem;">
+            <!-- Days will be dynamically injected here by JS -->
+          </div>
+          
+        </div>
+      </section>
+      
+      <!-- TAB: DYNAMIC DAY DETAIL VIEW -->
+      <section id="day-detail-tab" class="day-dashboard hidden fade-in">
+        <!-- The detailed contents for the selected day will be dynamically loaded here by JS -->
+      </section>
+      
+    </main>
+    
+  </div>
+
+  <!-- Load CDNs -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Load Main JavaScript Logic -->
+  <script src="app.js"></script>
+</body>
+</html>
