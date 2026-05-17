@@ -2030,13 +2030,17 @@ body {
     padding: 0.85rem !important;
     margin-bottom: 1rem !important;
     max-width: 100% !important;
+    min-width: 0 !important;
+    width: 100% !important;
     box-sizing: border-box !important;
   }
 
   .chart-container {
     height: 200px !important; /* Optimized height for iPhone screens to prevent vertical pushes */
     max-width: 100% !important;
+    min-width: 0 !important;
     width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   /* Strategy Grid & Timelines */
@@ -2044,7 +2048,9 @@ body {
     grid-template-columns: 1fr !important;
     gap: 1rem !important;
     max-width: 100% !important;
+    min-width: 0 !important;
     width: 100% !important;
+    box-sizing: border-box !important;
   }
   
   .analyst-card {
@@ -2385,6 +2391,11 @@ body {
   margin-bottom: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   scrollbar-width: none;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+  flex-shrink: 1 !important;
 }
 
 .mini-chart-date-selector::-webkit-scrollbar {
