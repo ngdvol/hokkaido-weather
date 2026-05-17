@@ -1431,3 +1431,16 @@ function closeMobileMenu() {
     sidebar.classList.remove('open');
   }
 }
+
+// Close mobile menu when clicking or tapping outside of it
+document.addEventListener('click', function(event) {
+  const sidebar = document.querySelector('.sidebar');
+  const btn = document.getElementById('hamburger-btn');
+  
+  if (sidebar && sidebar.classList.contains('open')) {
+    // Check if the click occurred outside both the sidebar drawer and the toggle button
+    if (!sidebar.contains(event.target) && btn && !btn.contains(event.target)) {
+      closeMobileMenu();
+    }
+  }
+});
